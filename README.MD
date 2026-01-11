@@ -2,6 +2,7 @@
 
 ### Comando terraform basicos
 
+```bash 
 terraform init
 
 terraform plan
@@ -9,19 +10,22 @@ terraform plan
 terraform apply 
 
 terraform destroy 
+```
+
 
 ### Comandos extras 
 
+```bash 
 az storage blob show --container-name tfstate  --name functions-dev.tfstate --account-name sttfstate7cjk72 --query "metadata.terraformlockid" -o tsv
+```
 
 
 ## Desplegar funciones 
-
+```bash 
 npm install -g azure-functions-core-tools@4 --unsafe-perm true
 
-
 func azure functionapp publish func-http-dev
-
+```
 
 ## Error de terrafor cuando lo cierras con Ctrl + c 
 
