@@ -4,14 +4,18 @@ resource "azurerm_resource_group" "rg" {
 }
 
 module "storage" {
-  source = "../../modules/storage"
-  name = "stfuncdev"
+  source              = "../modules/storage"
+  name                = "stfuncdev"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
+
+  tags = {
+    env = "dev"
+  }
 }
 
 module "function_app" {
-  source = "../../modules/functions"
+  source = "../modules/functions"
 
   name = "func-http-dev"
 

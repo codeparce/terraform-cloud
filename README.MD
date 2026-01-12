@@ -1,4 +1,10 @@
-# Azure Functions + HTTP Trigger
+# Azure + Terraform
+
+para colocar alias en linux
+
+```bash
+alias tf="terraform"
+```
 
 ### Comando terraform basicos
 
@@ -19,13 +25,6 @@ terraform destroy
 az storage blob show --container-name tfstate  --name functions-dev.tfstate --account-name sttfstate7cjk72 --query "metadata.terraformlockid" -o tsv
 ```
 
-
-## Desplegar funciones 
-```bash 
-npm install -g azure-functions-core-tools@4 --unsafe-perm true
-
-func azure functionapp publish func-http-dev
-```
 
 ## Error de terrafor cuando lo cierras con Ctrl + c 
 
