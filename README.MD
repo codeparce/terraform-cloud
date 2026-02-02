@@ -11,6 +11,8 @@ alias tf="terraform"
 ```bash 
 terraform init
 
+terraform console
+
 terraform plan
 
 terraform apply 

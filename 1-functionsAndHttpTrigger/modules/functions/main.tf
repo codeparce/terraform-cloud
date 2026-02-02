@@ -28,7 +28,23 @@ resource "azurerm_linux_function_app" "alfa" {
     }
   }
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   app_settings = {
+    #AzureWebJobsStorage      = azurerm_storage_account.storage.primary_connection_string
     FUNCTIONS_WORKER_RUNTIME = "node"
   }
 }
+
+
+# ------------------------
+# Azure Function Rol
+# ------------------------
+
+#resource "azurerm_role_assignment" "func_storage_blob" {
+#  scope                = var.storage_id
+#  role_definition_name = "Storage Blob Data Contributor"
+#  principal_id         = azurerm_linux_function_app.alfa.identity[0].principal_id
+#}
