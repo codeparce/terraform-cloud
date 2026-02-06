@@ -4,12 +4,13 @@ export TF_VAR_resource_group_name
 export TF_VAR_static_app_name
 export TF_VAR_location
 
-source ../logs.sh
-source ./azure_login.sh
-
 LOG_AZ="azure-logs.log"
 
 touch $LOG_AZ 
+
+source ../logs.sh
+source ./azure_login.sh
+
  
 source .env 
 
