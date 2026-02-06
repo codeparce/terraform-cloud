@@ -8,7 +8,7 @@ touch $LOG_AZ $LOG_ERR
 
 # Guardar TODO (stdout + stderr), append
 
-exec > >(tee -a "$LOG_AZ") 2> >(tee -a "$LOG_ERR" >&2)
+exec >>"$LOG_AZ" 2>>"$LOG_ERR"
 
 on_error() {
   echo "❌ ERROR detected. Showing logs:"
