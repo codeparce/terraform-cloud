@@ -27,6 +27,10 @@ terraform init \
 
 echo "✅ terraform init"
 
+echo "$TF_VAR_static_app_name"
+echo "$TF_VAR_resource_group_name"
+echo "$TF_VAR_location"
+
 terraform plan
 
 echo "✅ terraform plan"
