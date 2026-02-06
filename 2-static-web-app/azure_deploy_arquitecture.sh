@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-LOG_AZ="azure-logs.log"
+source ../logs.sh
 
-echo "Azure Login CLI"
+LOG_AZ="azure-logs.log"
 
 az login --service-principal \
   -u "$ARM_CLIENT_ID" \
@@ -11,20 +11,13 @@ az login --service-principal \
 
 echo "✅ Azure Login CLI"
 
-echo "Set the subscription"
-
 az account set --subscription "$ARM_SUBSCRIPTION_ID" > "$LOG_AZ" 2>&1
 
 echo "✅ Set the subscription"
 
-echo "Set environment"
-
 source .env 
 
 echo "✅ Set environment"
-
-
-echo "terraform init and apply"
 
 terraform 
 
