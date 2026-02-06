@@ -4,7 +4,7 @@ set -euo pipefail
 LOG_FILE="general-logs.log"
 LOG_ERR=error.log 
 
-touch $LOG_AZ $LOG_ERR
+touch $LOG_FILE $LOG_ERR
 
 # Guardar TODO (stdout + stderr), append
 
