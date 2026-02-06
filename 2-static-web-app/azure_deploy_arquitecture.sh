@@ -7,7 +7,7 @@ export TF_VAR_location
 source ../logs.sh
 
 LOG_AZ="azure-logs.log"
-FILE_JSON="static-web-app-secrets.json"
+FILE_JSON="secret/static-web-app-secrets.json"
 
 touch $LOG_AZ $FILE_JSON
  
