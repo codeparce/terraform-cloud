@@ -5,14 +5,16 @@ echo "Azure Login CLI"
 
 #ls -la ./
 
+touch azure-login.log 
+
 az login --service-principal \
   -u "$ARM_CLIENT_ID" \
   -p "$ARM_CLIENT_SECRET" \
-  --tenant "$ARM_TENANT_ID" > "azure-login.log" 2>&1
+  --tenant "$ARM_TENANT_ID" >> azure-login.log 2>&1
 
 echo "Set the subscription"
 
-az account set --subscription "$ARM_SUBSCRIPTION_ID" > "azure-login.log" 2>&1
+az account set --subscription "$ARM_SUBSCRIPTION_ID" >> azure-login.log 2>&1
 
 echo "Set environment"
 
