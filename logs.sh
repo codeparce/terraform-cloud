@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -Eeuo pipefail
 
 LOG_FILE="general-logs.log"
 LOG_ERR=error.log 
