@@ -8,7 +8,7 @@ source ../logs.sh
 
 LOG_AZ="azure-logs.log"
 FILE_JSON="secret/static-web-app-secrets.json"
-
+mkdir -p secret
 touch $LOG_AZ $FILE_JSON
  
 az login --service-principal \
