@@ -35,7 +35,7 @@ az staticwebapp secrets list \
 
 ## Se obtine el token 
 
-swa deploy ./dist --deployment-token my-token --env production
+swa deploy ./dist --deployment-token api-key --env production
 
 ```
 
