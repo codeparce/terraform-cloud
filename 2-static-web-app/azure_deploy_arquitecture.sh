@@ -8,7 +8,7 @@ touch $LOG_AZ $LOG_ERR
 
 # Guardar TODO (stdout + stderr), append
 
-exec >>"$LOG_AZ" 2>>"$LOG_ERR"
+exec >>(tee -a "$LOG_AZ") 2>> (tee -a "$LOG_ERR" >&2)
 
 on_error() {
   echo "❌ ERROR detected. Showing logs:"
@@ -24,11 +24,11 @@ echo "Azure Login CLI"
 az login --service-principal \
   -u "$ARM_CLIENT_ID" \
   -p "$ARM_CLIENT_SECRET" \
-  --tenant "$ARM_TENANT_ID" 
+  --tenant "$ARM_TENANT_ID"  > dev/null
 
 echo "Set the subscription"
 
-az account set --subscription "$ARM_SUBSCRIPTION_ID"
+az account set --subscription "$ARM_SUBSCRIPTION_ID" > dev/null
 
 echo "Set environment"
 
