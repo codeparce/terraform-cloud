@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+set -e
+
+export TF_VAR_resource_group_name
+export TF_VAR_static_app_name
+export TF_VAR_location
 
 source ../logs.sh
 
