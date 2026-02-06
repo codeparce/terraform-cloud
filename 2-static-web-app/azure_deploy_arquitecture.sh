@@ -28,14 +28,12 @@ echo "✅ Set environment"
 terraform init \
   -backend-config="key=${TF_VAR_static_app_name}.tfstate" -reconfigure
 
-terraform force-unlock -force ab2e9bb0-79b5-9ac8-d817-118d8b4b7701 || true
-
 
 echo "✅ terraform init"
 
-echo "$TF_VAR_static_app_name"
-echo "$TF_VAR_resource_group_name"
-echo "$TF_VAR_location"
+#echo "$TF_VAR_static_app_name"
+#echo "$TF_VAR_resource_group_name"
+#echo "$TF_VAR_location"
 
 terraform plan -lock-timeout=1m
 
