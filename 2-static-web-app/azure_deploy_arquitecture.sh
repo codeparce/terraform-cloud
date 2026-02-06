@@ -40,9 +40,14 @@ terraform apply -lock-timeout=1m -auto-approve
 
 echo "✅ terraform apply"
 
+NORMALIZED_NAME=$(echo "$TF_VAR_static_app_name" \
+  | tr '[:upper:]' '[:lower:]' \
+  | tr '/' '-' \
+  | cut -c1-60)
+
 
 az staticwebapp secrets list \
---name $TF_VAR_static_app_name \
+--name $NORMALIZED_NAME \
 --resource-group $TF_VAR_resource_group_name > $FILE_JSON
 
 echo "✅ SUCESS: Secrets exported to $FILE_JSON"
