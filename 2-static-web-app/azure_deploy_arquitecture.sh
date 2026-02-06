@@ -24,10 +24,12 @@ echo "✅ Set the subscription"
 source .env 
 
 echo "✅ Set environment"
-terraform force-unlock -force ab2e9bb0-79b5-9ac8-d817-118d8b4b7701 || true
 
 terraform init \
   -backend-config="key=${TF_VAR_static_app_name}.tfstate" -reconfigure
+
+terraform force-unlock -force ab2e9bb0-79b5-9ac8-d817-118d8b4b7701 || true
+
 
 echo "✅ terraform init"
 
