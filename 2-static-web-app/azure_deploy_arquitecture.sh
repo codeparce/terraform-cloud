@@ -4,6 +4,8 @@ source ../logs.sh
 
 LOG_AZ="azure-logs.log"
 
+touch $LOG_AZ 
+
 az login --service-principal \
   -u "$ARM_CLIENT_ID" \
   -p "$ARM_CLIENT_SECRET" \
