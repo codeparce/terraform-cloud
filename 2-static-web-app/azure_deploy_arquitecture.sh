@@ -1,28 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "Azure Login CLI"
+LOG_AZ="azure-logs.log"
+LOG_ERR=error.log 
 
-#ls -la ./
+touch $LOG_AZ $LOG_ERR
 
-touch azure-login.log 
+# Guardar TODO (stdout + stderr), append
+
+exec > >(tee -a "$LOG_AZ") 2> >(tee -a "$LOG_ERR" >&2)
+
 on_error() {
   echo "❌ ERROR detected. Showing logs:"
   echo "---------------------------------"
-  cat azure-login.log 
+  cat $LOG_ERR
   echo "---------------------------------"
 }
 
 trap on_error ERR
 
+echo "Azure Login CLI"
+
 az login --service-principal \
   -u "$ARM_CLIENT_ID" \
   -p "$ARM_CLIENT_SECRET" \
-  --tenant "$ARM_TENANT_ID" >> azure-login.log 2>&1
+  --tenant "$ARM_TENANT_ID" 
 
 echo "Set the subscription"
 
-az account set --subscription "$ARM_SUBSCRIPTION_ID" >> azure-login.log 2>&1
+az account set --subscription "$ARM_SUBSCRIPTION_ID"
 
 echo "Set environment"
 
