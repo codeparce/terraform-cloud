@@ -39,6 +39,6 @@ terraform plan -lock-timeout=1m
 
 echo "✅ terraform plan"
 
-#terraform apply -lock-timeout=1m -auto-approve
+terraform apply -lock-timeout=1m -auto-approve
 
 echo "✅ terraform apply"
