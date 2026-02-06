@@ -22,8 +22,14 @@ source .env
 echo "✅ Set environment"
 
 
-terraform init -input=false
-echo "✅ terraform init and apply"
+terraform init \
+  -backend-config="key=${TF_VAR_static_app_name}.tfstate" -reconfigure
+
+echo "✅ terraform init"
+
+terraform plan
+
+echo "✅ terraform plan"
 
 #terraform apply -auto-approve
 

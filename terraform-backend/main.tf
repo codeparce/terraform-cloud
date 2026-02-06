@@ -1,21 +1,20 @@
 resource "azurerm_resource_group" "tfstate" {
-  name     = "rg-tfstatejddev"
-  location = "West US 2"
+  name     = "rg-terraform-state"
+  location = "East US"
 }
 
-
 resource "azurerm_storage_account" "tfstate" {
-  name                     = "sttfstatejddev"
+  name                     = "tfstatecodeparce"   # debe ser ÚNICO en Azure
   resource_group_name      = azurerm_resource_group.tfstate.name
   location                 = azurerm_resource_group.tfstate.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
-  allow_nested_items_to_be_public = false
+  #allow_blob_public_access = false
 }
 
 resource "azurerm_storage_container" "tfstate" {
-  name                  = "tfstatejddev"
+  name                  = "tfstate"
   storage_account_name  = azurerm_storage_account.tfstate.name
   container_access_type = "private"
 }

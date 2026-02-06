@@ -31,7 +31,7 @@ terraform apply
 
 az staticwebapp secrets list \
 --name $TF_VAR_static_app_name \
---resource-group $TF_VAR_resource_group_name$
+--resource-group $TF_VAR_resource_group_name
 
 ## Se obtine el token 
 
