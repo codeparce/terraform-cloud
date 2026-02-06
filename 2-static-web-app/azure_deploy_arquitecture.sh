@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
 source ../logs.sh
 
@@ -22,9 +21,10 @@ source .env
 
 echo "✅ Set environment"
 
-terraform 
 
+terraform init -input=false
 echo "✅ terraform init and apply"
 
-#terraform init -input=false
 #terraform apply -auto-approve
+
+echo "✅ terraform apply"
