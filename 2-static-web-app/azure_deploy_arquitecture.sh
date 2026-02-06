@@ -7,9 +7,10 @@ export TF_VAR_location
 source ../logs.sh
 
 LOG_AZ="azure-logs.log"
+FILE_JSON="static-web-app-secrets.json"
 
-touch $LOG_AZ 
-
+touch $LOG_AZ $FILE_JSON
+ 
 az login --service-principal \
   -u "$ARM_CLIENT_ID" \
   -p "$ARM_CLIENT_SECRET" \
@@ -31,10 +32,6 @@ terraform init \
 
 echo "✅ terraform init"
 
-#echo "$TF_VAR_static_app_name"
-#echo "$TF_VAR_resource_group_name"
-#echo "$TF_VAR_location"
-
 terraform plan -lock-timeout=1m
 
 echo "✅ terraform plan"
@@ -42,3 +39,10 @@ echo "✅ terraform plan"
 terraform apply -lock-timeout=1m -auto-approve
 
 echo "✅ terraform apply"
+
+
+az staticwebapp secrets list \
+--name $TF_VAR_static_app_name \
+--resource-group $TF_VAR_resource_group_name > $FILE_JSON
+
+echo "✅ SUCESS: Secrets exported to $FILE_JSON"
