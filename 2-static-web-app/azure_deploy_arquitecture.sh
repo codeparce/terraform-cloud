@@ -6,6 +6,14 @@ echo "Azure Login CLI"
 #ls -la ./
 
 touch azure-login.log 
+on_error() {
+  echo "❌ ERROR detected. Showing logs:"
+  echo "---------------------------------"
+  cat azure-login.log 
+  echo "---------------------------------"
+}
+
+trap on_error ERR
 
 az login --service-principal \
   -u "$ARM_CLIENT_ID" \
