@@ -5,13 +5,15 @@ echo "Azure Login CLI"
 
 ls -la ./
 
-az login --service-principal --username "${{ vars.ARM_CLIENT_ID }}" \
---password "${{ vars.ARM_CLIENT_SECRET }}" --tenant "${{ vars.ARM_TENANT_ID }}"
+az login --service-principal \
+  -u "$ARM_CLIENT_ID" \
+  -p "$ARM_CLIENT_SECRET" \
+  --tenant "$ARM_TENANT_ID"
 
 
 echo "Set the subscription"
 
-az account set --subscription "${{vars.ARM_SUBSCRIPTION_ID}}"
+az account set --subscription "$ARM_SUBSCRIPTION_ID"
 
 echo "Set environment"
 
