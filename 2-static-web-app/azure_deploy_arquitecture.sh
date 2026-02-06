@@ -50,4 +50,7 @@ az staticwebapp secrets list \
 --name $NORMALIZED_NAME \
 --resource-group $TF_VAR_resource_group_name > $FILE_JSON
 
+
+ls -la 
+
 echo "✅ SUCESS: Secrets exported to $FILE_JSON"
