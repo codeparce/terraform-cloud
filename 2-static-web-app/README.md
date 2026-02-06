@@ -17,6 +17,7 @@ npm run build
 ## Infraestrucutra 
 
 ```bash
+source .env
 terraform init
 
 terraform apply 
@@ -40,6 +41,13 @@ swa deploy ./dist --deployment-token my-token --env production
 
 
 ## Variables para poder acceder al azure
+
+
+|Variable	| Valor|
+|ARM_CLIENT_ID|	appId|
+|ARM_CLIENT_SECRET|	password|
+|ARM_TENANT_ID|	tenant|
+|ARM_SUBSCRIPTION_ID|	Id-subscriptions|
 
 ```bash
 ARM_CLIENT_ID=
