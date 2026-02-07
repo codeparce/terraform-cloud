@@ -12,7 +12,6 @@ touch $LOG_AZ $FILE_JSON
 source ../logs.sh
 source ./azure_login.sh
 
-
 source .env 
 
 echo "✅ Set environment"
