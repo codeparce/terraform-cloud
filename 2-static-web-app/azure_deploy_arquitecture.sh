@@ -5,7 +5,7 @@ export TF_VAR_static_app_name
 export TF_VAR_location
 
 LOG_AZ="azure-logs.log"
-FILE_JSON="secret/static-web-app-secrets.json"
+FILE_JSON="secret/static-web-app-json.json"
 mkdir -p secret
 touch $LOG_AZ $FILE_JSON
  
