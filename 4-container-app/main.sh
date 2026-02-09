@@ -7,6 +7,7 @@ source ../logs.sh
 source ../azure_login.sh
 source ../tf_deploy.sh
 
+echo "test: $GITHUB_REPOSITORY_NAME"
 
 enviroment 
 
