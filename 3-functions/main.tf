@@ -13,12 +13,13 @@ resource "google_project_service" "cloudbuild" {
   disable_on_destroy = false
 }
 
-#data "google_project" "project" {}
-
+data "google_storage_bucket" "existing_bucket" {
+  name = var.bucket_name
+}
 
 resource "google_storage_bucket_object" "function_zip" {
-  name   = "functions.zip"
-  bucket = var.bucket_name
+  name   = "functions/functions.zip"
+  bucket = data.google_storage_bucket.existing_bucket.name
   source = "${path.module}/functions/functions.zip"
 }
 
@@ -39,7 +40,6 @@ resource "google_cloudfunctions2_function" "get_data" {
   }
 
   service_config {
-    #service_account_email = "${data.google_project.project.number}-compute@developer.gserviceaccount.com"
     available_memory   = "256M"
     timeout_seconds    = 60
     max_instance_count = 1
