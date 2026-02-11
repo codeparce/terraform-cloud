@@ -3,7 +3,7 @@ terraform_shell () {
     echo "✅ Set environment"
 
     terraform init \
-    -backend-config="key=${GITHUB_REPOSITORY}-${GITHUB_REF_NAME}.tfstate" -reconfigure
+    -backend-config="key=${GITHUB_REPOSITORY}-${GITHUB_REF_NAME}.tfstate" -reconfigure -lock=false
 
     echo "✅ terraform init"
 
@@ -11,7 +11,7 @@ terraform_shell () {
 
     echo "✅ terraform plan"
 
-    terraform apply -lock-timeout=1m -auto-approve
+    terraform apply -lock-timeout=1m -auto-approve -lock=false
 
     echo "✅ terraform apply"
 }
