@@ -6,7 +6,7 @@ terraform_shell () {
 
     echo "✅ terraform init"
 
-    terraform plan 2> error_plan.log
+    terraform plan 
 
     echo "✅ terraform plan"
 

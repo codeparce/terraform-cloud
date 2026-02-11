@@ -6,3 +6,5 @@
 secret
 
 .terraform.lock.hcl
+
+.log

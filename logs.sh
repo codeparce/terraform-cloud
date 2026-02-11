@@ -15,10 +15,10 @@ on_error() {
   echo "---------------------------------"
   cat $LOG_ERR
   echo "---------------------------------"
-  
-  if [[ -f error_plan.log && -s error_plan.log ]]; then
-    echo "Attempting to force-unlock Terraform state..."
-    grep 'ID:' error_plan.log | awk '{print $3}' | head -n 1 > lock_id.log
+  echo "Attempting to force-unlock Terraform state..."
+  grep 'ID:' $LOG_ERR | awk '{print $3}' | head -n 1 > lock_id.log
+
+  if [[ -f lock_id.log && -s lock_id.log ]]; then
     terraform force-unlock -force "$(cat lock_id.log)"
   else
     echo "No lock ID found, skipping force-unlock"
