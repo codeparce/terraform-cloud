@@ -16,7 +16,8 @@ on_error() {
   cat $LOG_ERR
   echo "---------------------------------"
 
-  grep 'ID:' error.log | awk '{print $5}' | head -n 1
+  grep 'ID:' error.log | awk '{print $1}' | head -n 1
+  grep 'ID:' error.log | awk '{print $2}' | head -n 1
   grep 'ID:' error.log | awk '{print $3}' | head -n 1
   grep 'ID:' error.log | awk '{print $4}' | head -n 1
 
