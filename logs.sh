@@ -18,7 +18,7 @@ on_error() {
 
   if [[ -f .terraform/lock_id.txt && -s .terraform/lock_id.txt ]]; then
     echo "Attempting to force-unlock Terraform state..."
-    terraform force-unlock "$(cat .terraform/lock_id.txt)"
+    terraform force-unlock -force "$(cat .terraform/lock_id.txt)"
   else
     echo "No lock ID found, skipping force-unlock"
   fi
