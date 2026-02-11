@@ -7,11 +7,11 @@ terraform_shell () {
 
     echo "✅ terraform init"
 
-    terraform plan -lock-timeout=1m
+    terraform plan -lock=false
 
     echo "✅ terraform plan"
 
-    terraform apply -lock-timeout=1m -auto-approve -lock=false
+    terraform apply -auto-approve -lock=false
 
     echo "✅ terraform apply"
 }
