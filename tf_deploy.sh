@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
-terraform_shell () {
+terraform_shell () { ## separar en funciones para mayor optimzacion en los jobs
 
     terraform init \
     -backend-config="key=${GITHUB_REPOSITORY}-${GITHUB_REF_NAME}.tfstate" -reconfigure
 
     echo "✅ terraform init"
-
-    terraform plan 
-
-    echo "✅ terraform plan"
 
     terraform apply  -auto-approve
 
