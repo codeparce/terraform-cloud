@@ -2,8 +2,7 @@
 terraform_shell () {
     echo "✅ Set environment"
 
-    terraform init \
-    -backend-config="key=${GITHUB_REPOSITORY}-${GITHUB_REF_NAME}.tfstate" -reconfigure
+    terraform init -backend-config="prefix=${BACKEND_NAME}" -reconfigure
 
     echo "✅ terraform init"
 

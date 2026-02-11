@@ -9,22 +9,17 @@ alias tf="terraform"
 ### Comando terraform basicos
 
 ```bash 
-terraform init
+export BACKEND_NAME='tfstate/func-app-get-data'
+
+terraform init -backend-config="prefix=${BACKEND_NAME}" -reconfigure
 
 terraform console
 
 terraform plan
 
-terraform apply 
+terraform apply  -lock-timeout=1m -auto-approve
 
 terraform destroy 
-```
-
-
-### Comandos extras 
-
-```bash 
-az storage blob show --container-name tfstate  --name functions-dev.tfstate --account-name sttfstate7cjk72 --query "metadata.terraformlockid" -o tsv
 ```
 
 

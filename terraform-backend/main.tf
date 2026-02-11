@@ -1,20 +1,32 @@
-resource "azurerm_resource_group" "tfstate" {
-  name     = "rg-terraform-state"
-  location = "East US"
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 5.0"
+    }
+  }
 }
 
-resource "azurerm_storage_account" "tfstate" {
-  name                     = "tfstatecodeparce"   # debe ser ÚNICO en Azure
-  resource_group_name      = azurerm_resource_group.tfstate.name
-  location                 = azurerm_resource_group.tfstate.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-
-  #allow_blob_public_access = false
+provider "google" {
+  project = var.project_id
+  region  = "us-central1"
 }
 
-resource "azurerm_storage_container" "tfstate" {
-  name                  = "tfstate"
-  storage_account_name  = azurerm_storage_account.tfstate.name
-  container_access_type = "private"
+resource "google_storage_bucket" "tf_state" {
+  name     = "${var.project_id}-tfstate"
+  location = "US"
+
+  versioning {
+    enabled = true
+  }
+
+  uniform_bucket_level_access = true
+
+  # lifecycle_rule {
+  #   action {
+  #     type = "Delete"
+  #   }
+  #   condition {
+  #   }
+  # }
 }
