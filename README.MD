@@ -1,10 +1,41 @@
 # Azure + Terraform
 
-para colocar alias en linux
+## Comandos Azure
+
 
 ```bash
-alias tf="terraform"
+### Obtener el OBJECT ID del service account
+az ad sp show --id $APP_ID --query id -o tsv
+
+## Obtener detalle del Axure Conteniner  registry
+az acr show --name $ACR_NAME
+
+## Login con cuenta de servicio
+az login --service-principal \
+-u $APP_ID \
+-p $CLIENT_SECRET \
+--tenant $TENANT_ID
+
+## Asiginar rol a la cuenta de servicio hacia el ACR
+az role assignment list \
+--assignee $APP_ID \
+--scope $(az acr show --name $ACR_NAME --query id -o tsv)
 ```
+
+### Autenticacion al registry de azure
+
+```bash
+TOKEN=$(az acr login \
+--name $ACR_NAME \
+--expose-token \
+--query accessToken \
+-o tsv)
+
+docker login $ACR_NAME.azurecr.io \
+--username 00000000-0000-0000-0000-000000000000 \
+--password $TOKEN
+```
+
 
 ### Comando terraform basicos
 
@@ -53,8 +84,4 @@ terraform force-unlock 85064f66-88f0-d060-7b4f-518c6b0c2816
 ## Vuelve a ejecutar
 
 terraform console
-
-# O
-
-terraform plan
 ```
