@@ -1,4 +1,4 @@
-# Azure + Terraform
+# GCP + Terraform
 
 para colocar alias en linux
 
