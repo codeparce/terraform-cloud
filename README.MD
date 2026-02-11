@@ -1,10 +1,8 @@
-# Azure + Terraform
+# Terraform Cloud
 
-para colocar alias en linux
+[ Terraform Azure ](https://github.com/codeparceorg/terraform-cloud/tree/azure)
 
-```bash
-alias tf="terraform"
-```
+[ Terraform GCP ](https://github.com/codeparceorg/terraform-cloud/tree/gcp)
 
 ### Comando terraform basicos
 
@@ -20,41 +18,3 @@ terraform apply
 terraform destroy 
 ```
 
-
-### Comandos extras 
-
-```bash 
-az storage blob show --container-name tfstate  --name functions-dev.tfstate --account-name sttfstate7cjk72 --query "metadata.terraformlockid" -o tsv
-```
-
-
-## Error de terrafor cuando lo cierras con Ctrl + c 
-
-### caso 1 si no sale el id 
-
-```bash
-#En PowerShell:
-
-tasklist | findstr terraform
-
-## Si sale algo → mátalo:
-
-taskkill /F /IM terraform.exe
-```
-
-### caso 2 si sale el id 
-
-```bash
-## Libera el lock manualmente (seguro en tu caso)
-## Usa EL ID EXACTO que te muestra el error:
-
-terraform force-unlock 85064f66-88f0-d060-7b4f-518c6b0c2816
-
-## Vuelve a ejecutar
-
-terraform console
-
-# O
-
-terraform plan
-```

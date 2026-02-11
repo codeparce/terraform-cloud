@@ -1,9 +1,0 @@
-{
-  "name": "azure-function-hello",
-  "version": "1.0.0",
-  "description": "Simple Hello World Azure Function",
-  "main": "index.js",
-  "scripts": {
-    "start": "func start"
-  }
-}
