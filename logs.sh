@@ -16,9 +16,11 @@ on_error() {
   cat $LOG_ERR
   echo "---------------------------------"
 
-  grep 'ID:' $LOG_ERR | awk '{print $3}' | head -n 1
+  grep 'ID:' error.log | awk '{print $2}' | head -n 1
+  grep 'ID:' error.log | awk '{print $3}' | head -n 1
+  grep 'ID:' error.log | awk '{print $1}' | head -n 1
 
-  LOCK_ID=$(grep 'ID:' "$LOG_ERR" | awk '{print $3}' | head -n 1)
+  LOCK_ID=$(grep 'ID:' "$LOG_ERR" | awk '{print $2}' | head -n 1)
 
   if [[ -n "$LOCK_ID" ]]; then
     echo "Attempting to force-unlock Terraform state..."
