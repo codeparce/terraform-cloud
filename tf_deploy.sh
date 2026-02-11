@@ -6,9 +6,7 @@ terraform_shell () {
 
     echo "✅ terraform init"
 
-    terraform plan -lock-timeout=0s 2>&1 | tee plan.out || true
-
-    grep 'ID:' plan.out | awk '{print $2}' > .terraform/lock_id.txt || true
+    terraform plan 2> error_plan.log
 
     echo "✅ terraform plan"
 
