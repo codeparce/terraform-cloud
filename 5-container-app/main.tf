@@ -17,8 +17,8 @@ resource "azurerm_container_app" "app" {
     container {
       name   = var.container_app_name
       image  = var.container_image
-      cpu    = 0.50
-      memory = "0.5Gi"
+      cpu    = 0.5
+      memory = "1Gi"
 
       env {
         name  = "SPRING_PROFILES_ACTIVE"
