@@ -10,17 +10,18 @@ variable "resource_group_name" {
   type        = string
 }
 
-variable "log_aw" {
-  default     = "law-continer-app"
-  description = "nombre del Log Analytics Workspace"
-  type        = string
-}
-
-variable "continer_environment" {
+variable "container_environment" {
   default     = "continer-environment-app"
   description = "nombre del Container App Environment"
   type        = string
 }
+
+variable "container_environment_rg" {
+  default     = "continer-environment-app"
+  description = "nombre del Resource Group del Container App Environment"
+  type        = string
+}
+
 
 variable "container_app_name" {
   default     = "continer-app-example"

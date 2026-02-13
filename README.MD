@@ -4,8 +4,6 @@
 
 
 ```bash
-### Obtener el OBJECT ID del service account
-az ad sp show --id $APP_ID --query id -o tsv
 
 ## Obtener detalle del Axure Conteniner  registry
 az acr show --name $ACR_NAME
@@ -19,6 +17,12 @@ az login --service-principal \
 ## Asiginar rol a la cuenta de servicio hacia el ACR
 az role assignment list \
 --assignee $APP_ID \
+--scope $(az acr show --name $ACR_NAME --query id -o tsv)
+
+# Crear rol
+az role assignment create \
+--assignee $APP_ID \
+--role "User Access Administrator" \
 --scope $(az acr show --name $ACR_NAME --query id -o tsv)
 ```
 

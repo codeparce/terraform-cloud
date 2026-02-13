@@ -1,21 +1,11 @@
-resource "azurerm_resource_group" "rg" {
+data "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = var.location
 }
 
-resource "azurerm_log_analytics_workspace" "law" {
-  name                = var.log_aw
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  sku                 = "PerGB2018"
-  retention_in_days   = "30"
-}
-
-resource "azurerm_container_app_environment" "env" {
-  name                       = var.continer_environment
-  location                   = azurerm_resource_group.rg.location
-  resource_group_name        = azurerm_resource_group.rg.name
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
+data "azurerm_container_app_environment" "env" {
+  name                = var.container_environment
+  resource_group_name = var.container_environment_rg
 }
 
 resource "azurerm_container_app" "app" {
@@ -28,7 +18,7 @@ resource "azurerm_container_app" "app" {
     container {
       name   = var.container_app_name
       image  = var.container_image
-      cpu    = 0.25
+      cpu    = 0.50
       memory = "0.5Gi"
 
       env {

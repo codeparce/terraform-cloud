@@ -7,7 +7,7 @@ variable "static_app_name" {
 
 variable "resource_group_name" {
   description = "Nombre del Resource Group"
-  default     = "rg-myapp"
+  default     = "rg-static-apps-main"
   type        = string
 }
 
