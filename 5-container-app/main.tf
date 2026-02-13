@@ -1,6 +1,5 @@
 data "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
-  location = var.location
 }
 
 data "azurerm_container_app_environment" "env" {
@@ -10,8 +9,8 @@ data "azurerm_container_app_environment" "env" {
 
 resource "azurerm_container_app" "app" {
   name                         = var.container_app_name
-  container_app_environment_id = azurerm_container_app_environment.env.id
-  resource_group_name          = azurerm_resource_group.rg.name
+  container_app_environment_id = data.azurerm_container_app_environment.env.id
+  resource_group_name          = data.azurerm_resource_group.rg.name
   revision_mode                = "Single"
 
   template {

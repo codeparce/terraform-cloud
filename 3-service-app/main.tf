@@ -1,13 +1,12 @@
-resource "azurerm_resource_group" "rg" {
+data "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
-  location = var.location
 }
 
 
 resource "azurerm_service_plan" "plan" {
   name                = var.app_service_plan_name
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
 
   os_type  = "Linux" # Linux or Windows
   sku_name = "F1" # FREE B1 BASIC
@@ -16,8 +15,8 @@ resource "azurerm_service_plan" "plan" {
 
 resource "azurerm_linux_web_app" "app" {
   name                = var.app_name
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
   service_plan_id     = azurerm_service_plan.plan.id
 
 
