@@ -8,9 +8,9 @@ output "container_app_name" {
 }
 
 output "resource_group_name" {
-  value = azurerm_resource_group.rg.name
+  value = data.azurerm_resource_group.rg.name
 }
 
 output "container_app_environment_name" {
-  value = azurerm_container_app_environment.env.name
+  value = data.azurerm_container_app_environment.env.name
 }
