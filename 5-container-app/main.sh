@@ -11,4 +11,13 @@ azure_login
 
 enviroment 
 
+getEnvs
+
+ls
+
 terraform_shell
+
+
+getEnvs () {
+    az appconfig kv export --name $TF_VAR_app_config_name --label ${GITHUB_REPOSITORY_NAME}-${GITHUB_REF_NAME} --destination file --path ./config.json --format json --skip-feature
+}
