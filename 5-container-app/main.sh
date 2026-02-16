@@ -16,7 +16,7 @@ azure_login
 
 enviroment 
 
-getEnvs
+get_envs
 
 ls
 
