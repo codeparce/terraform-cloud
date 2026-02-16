@@ -4,7 +4,7 @@ Para manejo de configuraciones generales en las aplicaciones, solo se crea uno p
 
 ```bash
 export AZURE_SERVICE=config-app
-export GITHUB_REPOSITORY=codeparce
+export GITHUB_REPOSITORY=api-test-devops
 export GITHUB_REF_NAME=main
 
 
