@@ -11,7 +11,7 @@ az acr show --name $ACR_NAME
 ## Login con cuenta de servicio
 az login --service-principal \
 -u $APP_ID \
--p $CLIENT_SECRET \
+-p $APP_PASSWORD \
 --tenant $TENANT_ID
 
 ## Asiginar rol a la cuenta de servicio hacia el ACR
