@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-azure_login(){
-
-
+gcp_login(){
   echo "✅ GCP CLI lOGIN SUCCESSFUL"
-
-
 }

@@ -1,31 +1,17 @@
-resource "google_project_service" "functions" {
-  service            = "cloudfunctions.googleapis.com"
-  disable_on_destroy = false
-}
-
-resource "google_project_service" "run" {
-  service            = "run.googleapis.com"
-  disable_on_destroy = false
-}
-
-resource "google_project_service" "cloudbuild" {
-  service            = "cloudbuild.googleapis.com"
-  disable_on_destroy = false
-}
 
 data "google_storage_bucket" "existing_bucket" {
   name = var.bucket_name
 }
 
 resource "google_storage_bucket_object" "function_zip" {
-  name   = "functions/functions.zip"
+  name   = var.func_name+ ".zip"
   bucket = data.google_storage_bucket.existing_bucket.name
-  source = "${path.module}/functions/functions.zip"
+  source = "/functions/"+ var.func_name+ ".zip"
 }
 
 resource "google_cloudfunctions2_function" "get_data" {
-  name     = "get-data"
-  location = "us-central1"
+  name     = var.func_name
+  location = var.region
 
   build_config {
     runtime     = "nodejs20"

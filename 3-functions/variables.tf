@@ -21,3 +21,8 @@ variable "firestore_name" {
   default     = "firestore-database"
   type        = string
 }
+
+variable "func_name" {
+  default     = "func-node"
+  type        = string
+}
