@@ -1,23 +1,26 @@
 # GCP + Terraform
 
+PROJECT_ID = code-parce
+SERVICE_ACCOUNT = example@code-parce.iam.gserviceaccount.com
+FILE_PATH = exampleo.json
+
 ### Creacion de un service account para los deployments en el CI/CD
 
 ```bash
-#Crear un Service Account
+#Crear un Service Account (se debe hacer con la cuenta owner)
 gcloud iam service-accounts create terraform-ci --display-name "Terraform CI/CD service account"
 
 #Asignarle permisos
-gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:terraform-ci@$PROJECT_ID.iam.gserviceaccount.com"  --role="roles/editor"
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT"  --role="roles/editor"
 
 # Crear y descargar la clave JSON
-gcloud iam service-accounts keys create $FILE_PATH --iam-account=terraform-ci@$PROJECT_ID.iam.gserviceaccount.com
+gcloud iam service-accounts keys create $FILE_PATH --iam-account=$SERVICE_ACCOUNT
 
 #Configurar el CI/CD
 export GOOGLE_APPLICATION_CREDENTIALS="$FILE_PAT"
 
 gcloud auth activate-service-account --key-file="$GOOGLE_APPLICATION_CREDENTIALS"
 ```
-
 
 ### Comando terraform basicos
 
