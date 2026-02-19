@@ -67,6 +67,17 @@ terraform console
 
 ```
 
+
+# Vault CLI
+```bash
+export VAULT_ADDR="https://cloud-secrets-cluster-public-vault-7aa3a668.79996771.z1.hashicorp.cloud:8200";
+export VAULT_NAMESPACE="admin"
+
+vault login -method=userpass username=devops password=
+
+vault kv get -format=json secret/azure-secrets
+```
+
 ## Servicios gratuitos
 
 | Categoría                 | Servicio                | Límite gratuito mensual                                                                        | Notas importantes                                |
