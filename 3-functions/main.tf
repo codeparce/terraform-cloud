@@ -17,7 +17,7 @@ resource "google_cloudfunctions2_function" "get_data" {
     source {
       storage_source {
         bucket = var.bucket_name
-        object = "/functions/" + var.func_name + ".zip"
+        object = "functions/${var.func_name}.zip"
       }
     }
   }
@@ -30,15 +30,7 @@ resource "google_cloudfunctions2_function" "get_data" {
     environment_variables = local.env_map
   }
 
-  depends_on = [
-    google_project_service.functions,
-    google_project_service.run,
-    google_project_service.cloudbuild
-  ]
-
 }
-
-
 
 resource "google_cloud_run_service_iam_member" "public" {
   location = google_cloudfunctions2_function.get_data.location
