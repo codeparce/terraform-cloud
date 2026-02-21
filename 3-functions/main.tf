@@ -3,15 +3,7 @@ data "google_storage_bucket" "existing_bucket" {
   name = var.bucket_name
 }
 
-locals {
-  env_file = file("${path.module}/.env")
-
-  env_map = {
-    for line in split("\n", local.env_file) :
-    split("=", line)[0] => split("=", line)[1]
-    if length(trim(line)) > 0
-  }
-}
+locals { env_map = jsondecode(file("${path.module}/env.json")) }
 
 
 resource "google_cloudfunctions2_function" "get_data" {
