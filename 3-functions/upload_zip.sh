@@ -6,6 +6,11 @@ source ../vault_env.sh
 
 LOG_AZ="gcp-logs.log"
 
+sudo snap install vault
+
+vault -version
+
+
 #mkdir -p secret
 touch $LOG_AZ 
 
