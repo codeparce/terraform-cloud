@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-terraform_shell () {
+tf_deploy () {
     terraform init -backend-config="prefix=${BACKEND_NAME}" -reconfigure
 
     echo "✅ terraform init"

@@ -3,6 +3,7 @@
 source ../logs.sh
 source ../vault.sh
 source ../gcp.sh
+source ../terraform.sh
 
 LOG_GCP="gcp-logs.log"
 
@@ -20,4 +21,4 @@ gcp_login
 
 gcp_bucket
 
-terraform_shell
+tf_deploy
