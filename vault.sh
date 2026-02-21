@@ -17,7 +17,7 @@ getSecret(){
 
 
 getSecretJson(){
-    vault kv get -format=json secret/"$1"  > key.json
+    vault kv get -format=json secret/"$1"  | jq -r '.data.data' > key.json
     echo "✅ get service account"
 }
 
