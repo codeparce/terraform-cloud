@@ -19,4 +19,4 @@ enviroment .env
 
 gcp_login
 
-#terraform_shell
+terraform_shell
