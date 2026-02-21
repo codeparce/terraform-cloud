@@ -5,13 +5,18 @@ data "google_storage_bucket" "existing_bucket" {
 
 locals { env_map = jsondecode(file("${path.module}/env.json")) }
 
+resource "google_service_account_iam_member" "allow_sign_blob" {
+  service_account_id = "projects/code-parce/serviceAccounts/terraform-ci@code-parce.iam.gserviceaccount.com"
+  role               = "roles/iam.serviceAccountTokenCreator"
+  member             = "serviceAccount:terraform-ci@code-parce.iam.gserviceaccount.com"
+}
 
 resource "google_cloudfunctions2_function" "get_data" {
   name     = var.func_name
   location = var.region
 
   build_config {
-    runtime     = "nodejs20"
+    runtime     = "nodejs24"
     entry_point = "getData"
 
     source {
@@ -23,10 +28,10 @@ resource "google_cloudfunctions2_function" "get_data" {
   }
 
   service_config {
-    available_memory   = "256M"
-    timeout_seconds    = 60
-    max_instance_count = 1
-
+    available_memory      = "256M"
+    timeout_seconds       = 60
+    max_instance_count    = 1
+    service_account_email = "terraform-ci@code-parce.iam.gserviceaccount.com"
     environment_variables = local.env_map
   }
 

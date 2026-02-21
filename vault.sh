@@ -10,14 +10,12 @@ loginVault(){
 
 getSecret(){
     vault kv get -format=json secret/"$1"  | jq -r '.data.data' > env.tf.j
-    jq -r 'to_entries[] | "\(.key)=\(.value)"' env.tf.j > $2
     echo "✅ get secret vault"
 
-    envsubst < $2 > .env
     envsubst < env.tf.j > env.json 
+    jq -r 'to_entries[] | "\(.key)=\(.value)"' env.tf.j > .env
     echo "✅ replace envs"
     
-    cat .env
     cat env.json 
     echo "---------- 🔎 Validate enviroments ----------"
 }

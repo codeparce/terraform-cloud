@@ -20,6 +20,12 @@ gcloud iam service-accounts keys create $FILE_PATH --iam-account=$SERVICE_ACCOUN
 export GOOGLE_APPLICATION_CREDENTIALS="$FILE_PAT"
 
 gcloud auth activate-service-account --key-file="$GOOGLE_APPLICATION_CREDENTIALS"
+
+gcloud run services describe code-parce-func-main --region=us-central1 --format="value(spec.template.spec.serviceAccountName)"
+
+gcloud iam service-accounts add-iam-policy-binding 3199521993-compute@developer.gserviceaccount.com --member="serviceAccount:3199521993-compute@developer.gserviceaccount.com" --role="roles/iam.serviceAccountTokenCreator" --project=code-parce
+
+
 ```
 
 ### Comando terraform basicos
