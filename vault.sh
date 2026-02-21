@@ -11,7 +11,8 @@ loginVault(){
 getSecret(){
     vault kv get -format=json secret/"$1"   | jq -r '.data.data | to_entries[] | "\(.key)=\(.value)"' > $2
     echo "✅ get secret vault"
-    cat $2
+    envsubst < $2> .env
+    cat .env
     echo "---------- 🔎 Validate enviroments ----------"
 }
 

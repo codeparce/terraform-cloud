@@ -3,11 +3,10 @@ data "google_storage_bucket" "existing_bucket" {
   name = var.bucket_name
 }
 
-resource "google_storage_bucket_object" "function_zip" {
-  name   = var.func_name+ ".zip"
-  bucket = data.google_storage_bucket.existing_bucket.name
-  source = "/functions/"+ var.func_name+ ".zip"
+locals {
+  env_map = jsondecode(file("${path.module}/config.json"))
 }
+
 
 resource "google_cloudfunctions2_function" "get_data" {
   name     = var.func_name
@@ -20,7 +19,7 @@ resource "google_cloudfunctions2_function" "get_data" {
     source {
       storage_source {
         bucket = var.bucket_name
-        object = google_storage_bucket_object.function_zip.name
+        object = "/functions/"+ var.func_name+ ".zip"
       }
     }
   }
