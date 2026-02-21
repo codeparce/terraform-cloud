@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo apt install vault -y
+sudo snap install vault -y
 
 loginGcp(){
     vault login -method=userpass username=$VAULT_USER password=$VAULT_PASS
