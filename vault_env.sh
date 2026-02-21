@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-loginGcp(){
+loginVault(){
     vault login -method=userpass username=$VAULT_USER password=$VAULT_PASS
 }
 
