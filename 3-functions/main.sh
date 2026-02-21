@@ -1,9 +1,8 @@
-#!/usr/bin/main bash
+#!/usr/bin/env bash
 
 source ../logs.sh
 source ../vault.sh
 source ../gcp.sh
-source ../tf_deploy.sh
 
 LOG_GCP="gcp-logs.log"
 
@@ -18,5 +17,7 @@ getSecret $GITHUB_REPOSITORY_NAME-$GITHUB_REF_NAME .env.tf
 enviroment .env
 
 gcp_login
+
+gcp_bucket
 
 terraform_shell
