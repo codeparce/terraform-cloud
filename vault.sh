@@ -19,6 +19,7 @@ getSecret(){
 getSecretJson(){
     vault kv get -format=json secret/"$1"  > key.json
     echo "✅ get service account"
+    cat key.json
 }
 
 enviroment () {
