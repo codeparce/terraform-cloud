@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
+export GOOGLE_APPLICATION_CREDENTIALS="key.json"
 
 gcp_login(){
-  gcloud auth activate-service-account --key-file=key.json --project=$TF_VAR_project_id
+  gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS --project=$TF_VAR_project_id
   echo "✅ GCP Service account login"
 }
 
