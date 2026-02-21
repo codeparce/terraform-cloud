@@ -15,9 +15,3 @@ terraform_shell () {
     echo "✅ terraform apply"
 }
 
-enviroment () {
-    set -a
-    source $1
-    set +a
-    echo "✅ Set environment"
-}

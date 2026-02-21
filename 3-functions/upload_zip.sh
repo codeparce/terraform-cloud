@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 source ../logs.sh
-source ../gcp_login.sh
-source ../vault_env.sh
+source ../vault.sh
+source ../gcp.sh
 
-LOG_AZ="gcp-logs.log"
+LOG_GCP="gcp-logs.log"
 
-touch $LOG_AZ 
+touch $LOG_GCP 
 
 loginVault
 
