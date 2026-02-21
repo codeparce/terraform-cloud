@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
- 
+set -x
+
 source ../logs.sh
 source ../gcp_login.sh
 source ../vault_env.sh
