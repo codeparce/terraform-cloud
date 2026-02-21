@@ -12,10 +12,10 @@ getSecret(){
     vault kv get -format=json secret/"$1"   | jq -r '.data.data | to_entries[] | "\(.key)=\(.value)"' > $2
     echo "✅ get secret vault"
     envsubst < $2> .env
+    echo "✅ replace envs"
     cat .env
     echo "---------- 🔎 Validate enviroments ----------"
 }
-
 
 getSecretJson(){
     vault kv get -format=json secret/"$1"  | jq -r '.data.data' > key.json

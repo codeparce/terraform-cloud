@@ -15,8 +15,8 @@ getSecretJson service-account-terraform-gcp
 
 getSecret $GITHUB_REPOSITORY_NAME-$GITHUB_REF_NAME .env.tf
 
-enviroment .env.tf
+enviroment .env
 
 gcp_login
 
-terraform_shell
+#terraform_shell

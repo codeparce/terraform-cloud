@@ -4,7 +4,13 @@ data "google_storage_bucket" "existing_bucket" {
 }
 
 locals {
-  env_map = jsondecode(file("${path.module}/config.json"))
+  env_file = file("${path.module}/.env")
+
+  env_map = {
+    for line in split("\n", local.env_file) :
+    split("=", line)[0] => split("=", line)[1]
+    if length(trim(line)) > 0
+  }
 }
 
 
@@ -19,7 +25,7 @@ resource "google_cloudfunctions2_function" "get_data" {
     source {
       storage_source {
         bucket = var.bucket_name
-        object = "/functions/"+ var.func_name+ ".zip"
+        object = "/functions/" + var.func_name + ".zip"
       }
     }
   }
@@ -29,11 +35,7 @@ resource "google_cloudfunctions2_function" "get_data" {
     timeout_seconds    = 60
     max_instance_count = 1
 
-    environment_variables = {
-      PROJECT_ID            = var.project_id
-      FIRESTORE_DATABASE_ID = var.firestore_name
-      BUCKET = var.bucket_name
-    }
+    environment_variables = local.env_map
   }
 
   depends_on = [
