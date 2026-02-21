@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
 gcp_login(){
-  echo "✅ GCP CLI lOGIN SUCCESSFUL"
+  ls
+  gcloud auth activate-service-account --key-file=key.json --project=$TF_VAR_project_id
+  echo "✅ GCP Service account login"
 }
