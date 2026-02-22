@@ -2,7 +2,7 @@
 
 loginVault(){
     echo "loginVault()"
-    vault login -method=userpass username=$VAULT_USER password=$VAULT_PASS > "$LOG_GCP" 2>&1
+    vault login -method=userpass username=$VAULT_USER password=$VAULT_PASS > "$LOG_GCP" 2> "$LOG_ERR"
     echo "✅ Login vault"
 }
 
