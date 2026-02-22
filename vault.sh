@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 loginVault(){
-    echo "loginVault()"
+    export VAULT_SKIP_VERIFY=true
     vault login -method=userpass username=$VAULT_USER password=$VAULT_PASS > "$LOG_GCP" 2> "$LOG_ERR"
     echo "✅ Login vault"
 }
