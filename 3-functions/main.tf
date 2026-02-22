@@ -21,7 +21,7 @@ resource "google_cloudfunctions2_function" "get_data" {
 
     source {
       storage_source {
-        bucket = var.bucket_name
+        bucket = data.google_storage_bucket.existing_bucket.name
         object = "functions/${var.func_name}.zip"
       }
     }

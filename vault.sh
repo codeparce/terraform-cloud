@@ -16,7 +16,7 @@ getSecret(){
     jq -r 'to_entries[] | "\(.key)=\(.value)"' env.tf.j > .env
     echo "✅ replace envs"
     
-    cat env.json 
+    cat .env
     echo "---------- 🔎 Validate enviroments ----------"
 }
 
