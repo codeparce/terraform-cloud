@@ -6,10 +6,7 @@ loginVault(){
     echo "✅ Login vault"
 }
 
-getSecret(){
-    vault kv get -format=json secret/"$1"  | jq -r '.data.data' > env.tf.j
-    echo "✅ get secret vault"
-
+setEnvs(){
     envsubst < env.tf.j > env.json 
     jq -r 'to_entries[] | "\(.key)=\(.value)"' env.tf.j > .env
     echo "✅ replace envs"
@@ -19,9 +16,9 @@ getSecret(){
 }
 
 
-getSecretJson(){
-    vault kv get -format=json secret/"$1"  | jq -r '.data.data' > key.json
-    echo "✅ get service account"
+getSecret(){
+    vault kv get -format=json secret/"$1"  | jq -r '.data.data' > $2
+    echo "✅ get secret $1"
 }
 
 enviroment () {

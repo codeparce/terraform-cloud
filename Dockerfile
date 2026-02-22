@@ -14,13 +14,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Instalar dependencias básicas 
 # docker.io \
-# RUN apt-get update && apt-get install -y \
-#     ca-certificates \
-#     curl \
-#     jq \
-#     gettext-base \
-#     git \
-#     && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    curl \
+    jq \
+    gettext-base \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copiar binario de Vault
 COPY --from=vault /bin/vault /usr/local/bin/vault
@@ -45,7 +45,3 @@ WORKDIR /workspace
 
 CMD ["/bin/bash"]
 
-#docker build -t ci-tools-gcloud:latest .
-#docker run -it ci-tools-gcloud bash
-#docker tag ci-tools-gcloud:latest codeparce/ci-tools-gcloud:latest
-#docker push codeparce/ci-tools-gcloud:latest
