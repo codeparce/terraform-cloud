@@ -13,7 +13,7 @@ loginVault
 
 getSecretJson service-account-terraform-gcp 
 
-getSecret $GITHUB_REPOSITORY_NAME-$GITHUB_REF_NAME .env.tf
+getSecret $GITHUB_REPOSITORY_NAME-$GITHUB_REF_NAME 
 
 enviroment .env
 

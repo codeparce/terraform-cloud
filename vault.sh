@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-sudo snap install vault
-
-
 loginVault(){
     vault login -method=userpass username=$VAULT_USER password=$VAULT_PASS > "$LOG_GCP" 2>&1
     echo "✅ Login vault"
