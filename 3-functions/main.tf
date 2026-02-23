@@ -37,9 +37,11 @@ resource "google_cloudfunctions2_function" "get_data" {
 
 }
 
-resource "google_cloud_run_service_iam_member" "public" {
-  location = google_cloudfunctions2_function.get_data.location
-  service  = google_cloudfunctions2_function.get_data.name
-  role     = "roles/run.invoker"
-  member   = "allUsers"
+resource "google_cloudfunctions2_function_iam_member" "public_invoker" {
+  project        = google_cloudfunctions2_function.get_data.project
+  location       = google_cloudfunctions2_function.get_data.location
+  cloud_function = google_cloudfunctions2_function.get_data.name
+
+  role   = "roles/cloudfunctions.invoker"
+  member = "allUsers"
 }

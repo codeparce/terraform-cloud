@@ -8,7 +8,7 @@ loginVault(){
 
 setEnvs(){
     envsubst < env.tf.j > env.json 
-    jq -r 'to_entries[] | "\(.key)=\(.value)"' env.tf.j > .env
+    jq -r 'to_entries[] | "\(.key)=\(.value)"' env.json  > .env
     echo "✅ replace envs"
     
     cat .env

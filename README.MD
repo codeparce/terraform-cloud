@@ -1,7 +1,7 @@
 # GCP + Terraform
 
-PROJECT_ID = code-parce
-SERVICE_ACCOUNT = example@code-parce.iam.gserviceaccount.com
+PROJECT_ID = code-parce  
+SERVICE_ACCOUNT = example@code-parce.iam.gserviceaccount.com  
 FILE_PATH = exampleo.json
 
 ## Creacion de un service account para los deployments en el CI/CD
@@ -19,12 +19,23 @@ gcloud iam service-accounts keys create $FILE_PATH --iam-account=$SERVICE_ACCOUN
 #Configurar el CI/CD
 export GOOGLE_APPLICATION_CREDENTIALS="$FILE_PAT"
 
+#Activar la sesion con SA
 gcloud auth activate-service-account --key-file="$GOOGLE_APPLICATION_CREDENTIALS"
 
+## buscar que cuenta de servicio tiene la funcion
 gcloud run services describe code-parce-func-main --region=us-central1 --format="value(spec.template.spec.serviceAccountName)"
 
-# Dar roles al SA 
-gcloud iam service-accounts add-iam-policy-binding $SERVICE_ACCOUNT --member="$SERVICE_ACCOUNT" --role="roles/iam.serviceAccountTokenCreator" --project=code-parce
+    
+# Darle rol de IAM para generar tokens al SA  necesario para las functions
+gcloud iam service-accounts add-iam-policy-binding $SERVICE_ACCOUNT --member="$SERVICE_ACCOUNT"  --role="roles/iam.serviceAccountTokenCreator"  --project=code-parce
+
+# Darle rol para agregar politicas de la SA al proeycto 
+gcloud projects add-iam-policy-binding --member="$SERVICE_ACCOUNT" --role="roles/run.admin" --project=code-parce
+
+# Darle rol para agregar politicas de la SA al proeycto 
+gcloud projects add-iam-policy-binding --member="$SERVICE_ACCOUNT" --role="roles/iam.serviceAccountAdmin" --project=code-parce
+
+
 
 
 ```
