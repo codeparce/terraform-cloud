@@ -3,7 +3,12 @@ data "google_storage_bucket" "existing_bucket" {
   name = var.bucket_name
 }
 
-locals { env_map = jsondecode(file("${path.module}/env.json")) }
+locals {
+  env_map = try(
+    jsondecode(file("${path.module}/env.json")),
+    {}
+  )
+}
 
 resource "google_service_account_iam_member" "allow_sign_blob" {
   service_account_id = "projects/code-parce/serviceAccounts/terraform-ci@code-parce.iam.gserviceaccount.com"

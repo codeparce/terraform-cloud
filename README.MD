@@ -1,4 +1,11 @@
 # GCP + Terraform
+```bash
+set -a
+source .env
+set +a
+
+terraform init -backend-config="prefix=${BACKEND_NAME}" -reconfigure
+```
 
 PROJECT_ID = code-parce  
 SERVICE_ACCOUNT = example@code-parce.iam.gserviceaccount.com  
