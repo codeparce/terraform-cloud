@@ -1,17 +1,17 @@
-variable "static_app_name" {
+variable "STATIC_APP_NAME" {
   description = "Nombre del Static Web App"
   default     = "myapp"
   type        = string
 }
 
 
-variable "resource_group_name" {
+variable "RESOURCE_GROUP_NAME" {
   description = "Nombre del Resource Group"
   default     = "rg-static-apps-main"
   type        = string
 }
 
-variable "location" {
+variable "LOCATION" {
   description = "Location of the Resource Group"
   default     = "eastus"
   type        = string
