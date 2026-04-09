@@ -36,7 +36,6 @@ get_doppler_secrets(){
 
 enviroment () {
     local ENV_FILE=$1
-    set -a
     source $ENV_FILE
     set +a
     echo "✅ Set environment variables from $ENV_FILE"
