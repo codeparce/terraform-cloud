@@ -29,11 +29,11 @@ resource "azurerm_container_app" "app" {
       cpu    = 0.5
       memory = "1Gi"
 
-      dynamic "env" {
+      dynamic "secret" {
         for_each = local.env_map
         content {
-          name  = env.key
-          value = env.value
+          name  = secret.key
+          value = secret.value
         }
       }
     }
