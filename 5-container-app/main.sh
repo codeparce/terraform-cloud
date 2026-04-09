@@ -12,9 +12,9 @@ touch $LOG_AZ
 ## -----------------------------
 get_doppler_secrets "cloud_azure" ".env.cloud" env
 
-get_doppler_secrets $DOPPLER_CONFIG ".env" env
+get_doppler_secrets $APP_ENVIRONMENT ".env" env
 
-get_doppler_secrets $DOPPLER_CONFIG "config.json" json
+get_doppler_secrets $APP_ENVIRONMENT "config.json" json
 
 
 ## ----------------------------------
