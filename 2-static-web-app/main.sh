@@ -3,15 +3,23 @@
 source ../logs.sh
 source ../azure_login.sh
 source ../tf_deploy.sh
+source ../doppler_env.sh
 
 LOG_AZ="azure-logs.log"
 FILE_JSON="secret/static-web-app-json.json"
 mkdir -p secret
 touch $LOG_AZ $FILE_JSON
 
-azure_login
 
-enviroment
+get_doppler_secrets "cloud_azure" ".env.cloud"
+
+get_doppler_secrets $DOPPLER_CONFIG ".env"
+
+enviroment ".env"
+
+enviroment ".env.cloud"
+
+azure_login
 
 terraform_shell
 

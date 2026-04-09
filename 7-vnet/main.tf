@@ -1,6 +1,5 @@
 # main.tf — Lab 1: VNet básica
 
-
 resource "azurerm_resource_group" "rg" {
   name     = "rg-lab1"
   location = "East US"

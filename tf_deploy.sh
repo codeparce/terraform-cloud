@@ -12,8 +12,9 @@ terraform_shell () { ## separar en funciones para mayor optimzacion en los jobs
 }
 
 enviroment () {
+    VAR ENV_FILE=$1
     set -a
-    source .env
+    source $ENV_FILE
     set +a
     echo "✅ Set environment"
 }
