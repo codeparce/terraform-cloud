@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/main bash
  
-source ../logs.sh
+#source ../logs.sh
 
 source ../utils_deploy.sh
 
