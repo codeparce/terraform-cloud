@@ -16,13 +16,15 @@ get_doppler_secrets "cloud_azure" ".env.cloud"
 
 get_doppler_secrets $DOPPLER_CONFIG ".env"
 
-enviroment ".env"
-
 enviroment ".env.cloud"
 
-cat .env
-
 azure_login
+
+ls
+
+enviroment ".env"
+
+cat .env 
 
 terraform_shell
 
