@@ -1,35 +1,35 @@
-variable "location" {
+variable "LOCATION" {
   default     = "East US"
   description = "locacion del Resource Group"
   type        = string
 }
 
-variable "resource_group_name" {
+variable "RESOURCE_GROUP_NAME" {
   default     = "rg-springboot-free"
   description = "nombre del Resource Group"
   type        = string
 }
 
-variable "container_environment" {
+variable "CONTAINER_ENVIRONMENT" {
   default     = "continer-environment-app"
   description = "nombre del Container App Environment"
   type        = string
 }
 
-variable "container_environment_rg" {
+variable "CONTAINER_ENVIRONMENT_RG" {
   default     = "continer-environment-app"
   description = "nombre del Resource Group del Container App Environment"
   type        = string
 }
 
 
-variable "container_app_name" {
+variable "CONTAINER_APP_NAME" {
   default     = "continer-app-example"
   description = "nombre del Container App"
   type        = string
 }
 
-variable "container_image" {
+variable "CONTAINER_IMAGE" {
   default     = "continer-app-example:main"
   description = "camino de la imagen del contenedor"
   type        = string

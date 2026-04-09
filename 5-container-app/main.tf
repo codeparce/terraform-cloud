@@ -1,19 +1,19 @@
 data "azurerm_resource_group" "rg" {
-  name = var.resource_group_name
+  name = var.RESOURCE_GROUP_NAME
 }
 
 data "azurerm_container_app_environment" "env" {
-  name                = var.container_environment
-  resource_group_name = var.container_environment_rg
+  name                = var.CONTAINER_ENVIRONMENT
+  resource_group_name = var.CONTAINER_ENVIRONMENT_RG
 }
 
-locals {
-  env_map = jsondecode(file("${path.module}/config.json"))
-}
+# locals {
+#   env_map = jsondecode(file("${path.module}/config.json"))
+# }
 
 
 resource "azurerm_container_app" "app" {
-  name                         = var.container_app_name
+  name                         = var.CONTAINER_APP_NAME
   container_app_environment_id = data.azurerm_container_app_environment.env.id
   resource_group_name          = data.azurerm_resource_group.rg.name
   revision_mode                = "Single"
@@ -24,18 +24,18 @@ resource "azurerm_container_app" "app" {
 
   template {
     container {
-      name   = var.container_app_name
-      image  = var.container_image
+      name   = var.CONTAINER_APP_NAME
+      image  = var.CONTAINER_IMAGE
       cpu    = 0.5
       memory = "1Gi"
 
-      dynamic "env" {
-        for_each = local.env_map
-        content {
-          name  = env.key
-          value = env.value
-        }
-      }
+      # dynamic "env" {
+      #   for_each = local.env_map
+      #   content {
+      #     name  = env.key
+      #     value = env.value
+      #   }
+      # }
     }
 
     min_replicas = 0
