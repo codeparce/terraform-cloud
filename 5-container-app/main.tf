@@ -34,7 +34,6 @@ resource "azurerm_container_app" "app" {
         content {
           name  = env.key
           value = env.value
-          secret_name = env.key
         }
       }
     }
