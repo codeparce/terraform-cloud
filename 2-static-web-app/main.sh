@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
  
 source ../logs.sh
-source ../azure_login.sh
-source ../tf_deploy.sh
-source ../doppler_env.sh
+source ../utils_deploy.sh
 
 LOG_AZ="azure-logs.log"
 FILE_JSON="secret/static-web-app-json.json"
 mkdir -p secret
 touch $LOG_AZ $FILE_JSON
-
 
 get_doppler_secrets "cloud_azure" ".env.cloud"
 
