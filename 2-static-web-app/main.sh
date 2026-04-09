@@ -20,7 +20,7 @@ enviroment ".env"
 
 enviroment ".env.cloud"
 
-ll && cat .env
+cat .env
 
 azure_login
 
