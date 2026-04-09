@@ -23,6 +23,7 @@ azure_login
 enviroment ".env"
 
 echo $TF_VAR_static_app_name
+
 echo $TF_VAR_resource_group_name
 
 terraform_shell

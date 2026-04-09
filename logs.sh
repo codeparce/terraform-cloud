@@ -2,33 +2,39 @@
 set -Eeuo pipefail
 
 LOG_FILE="general-logs.log"
-LOG_ERR=error.log 
+LOG_ERR="error.log"
 
-touch $LOG_FILE $LOG_ERR
+touch "$LOG_FILE" "$LOG_ERR"
 
-# Guardar TODO (stdout + stderr), append
-
-exec > >(tee -a "$LOG_FILE") 2>> "$LOG_ERR"
+# Guardar stdout y stderr
+exec > >(tee -a "$LOG_FILE") 2>>"$LOG_ERR"
 
 on_error() {
-  echo "❌ ERROR detected. Showing logs:"
+  EXIT_CODE=$?
+  LINE_NO=$1
+
+  echo ""
+  echo "❌ ERROR detected (exit code: $EXIT_CODE) at line $LINE_NO"
   echo "---------------------------------"
-  cat $LOG_ERR
+  
+  echo "👉 Last 50 lines of error log:"
+  tail -n 50 "$LOG_ERR" || true
+  
   echo "---------------------------------"
 
-  grep 'ID:' error.log | awk '{print $1}' | head -n 1
-  grep 'ID:' error.log | awk '{print $2}' | head -n 1
-  grep 'ID:' error.log | awk '{print $3}' | head -n 1
-  grep 'ID:' error.log | awk '{print $4}' | head -n 1
+  # Buscar LOCK_ID de forma segura (sin romper el script)
+  LOCK_ID=$(grep 'ID:' "$LOG_ERR" 2>/dev/null | awk '{print $4}' | head -n 1 || true)
 
-  LOCK_ID=$(grep 'ID:' "$LOG_ERR" | awk '{print $4}' | head -n 1)
-
-  if [[ -n "$LOCK_ID" ]]; then
-    echo "Attempting to force-unlock Terraform state..."
-    terraform force-unlock -force "$LOCK_ID"
+  if [[ -n "${LOCK_ID:-}" ]]; then
+    echo "🔓 Attempting to force-unlock Terraform state with ID: $LOCK_ID"
+    terraform force-unlock -force "$LOCK_ID" || echo "⚠️ Failed to unlock (ignored)"
   else
-    echo "No lock ID found, skipping force-unlock"
+    echo "ℹ️ No lock ID found, skipping force-unlock"
   fi
+
+  echo "❌ Script failed"
+  exit "$EXIT_CODE"
 }
 
-trap on_error ERR
+# Pasar número de línea al trap
+trap 'on_error $LINENO' ERR
