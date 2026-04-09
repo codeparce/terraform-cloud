@@ -7,6 +7,10 @@ terraform_shell () { ## separar en funciones para mayor optimzacion en los jobs
 
     echo "✅ terraform init"
 
+    #terra form plan -out=tfplan -input=false
+    
+    #echo "✅ terraform plan"
+
     terraform apply  -auto-approve
 
     echo "✅ terraform apply"
