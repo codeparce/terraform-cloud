@@ -1,5 +1,6 @@
-#!/usr/bin/main bash
- 
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
 source ../logs.sh
 
 source ../utils_deploy.sh
@@ -21,10 +22,6 @@ enviroment ".env.cloud"
 enviroment ".env"
 
 azure_login
-
-echo "$TF_VAR_STATIC_APP_NAME"
-
-echo "$TF_VAR_RESOURCE_GROUP_NAME"
 
 terraform_shell
 
