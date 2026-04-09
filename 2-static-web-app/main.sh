@@ -16,15 +16,15 @@ get_doppler_secrets "cloud_azure" ".env.cloud"
 
 get_doppler_secrets $DOPPLER_CONFIG ".env"
 
+enviroment ".env"
 enviroment ".env.cloud"
 
 azure_login
 
-enviroment ".env"
 
-echo $TF_VAR_static_app_name
+echo "$TF_VAR_static_app_name"
 
-echo $TF_VAR_resource_group_name
+echo "$TF_VAR_resource_group_name"
 
 terraform_shell
 
