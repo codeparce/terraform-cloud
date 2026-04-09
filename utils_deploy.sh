@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 terraform_shell () { ## separar en funciones para mayor optimzacion en los jobs
 
     terraform init \
@@ -25,15 +26,15 @@ azure_login(){
 }
 
 get_doppler_secrets(){
-    SECRET=$1
-    ENV_FILE=$2
+    local  SECRET=$1
+    local ENV_FILE=$2
 
     doppler secrets download -p vault-codeparce -c $SECRET --no-file --format env -t "$DOPPLER_TOKEN" > $ENV_FILE
 }
 
 
 enviroment () {
-    ENV_FILE=$1
+    local ENV_FILE=$1
     set -a
     source $ENV_FILE
     set +a
