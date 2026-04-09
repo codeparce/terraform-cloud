@@ -16,9 +16,9 @@ touch $LOG_AZ $FILE_JSON
 ## -----------------------------
 ## 1. OBTENER SECRETS DE DOPPLER
 ## -----------------------------
-get_doppler_secrets "cloud_azure" ".env.cloud"
+get_doppler_secrets "cloud_azure" ".env.cloud" env
 
-get_doppler_secrets $DOPPLER_CONFIG ".env"
+get_doppler_secrets $DOPPLER_CONFIG ".env" env
 
 ## ----------------------------------
 ## 2. CONFIGURAR VARIABLES DE ENTORNO

@@ -7,9 +7,9 @@ data "azurerm_container_app_environment" "env" {
   resource_group_name = var.CONTAINER_ENVIRONMENT_RG
 }
 
-# locals {
-#   env_map = jsondecode(file("${path.module}/config.json"))
-# }
+locals {
+  env_map = jsondecode(file("${path.module}/config.json"))
+}
 
 
 resource "azurerm_container_app" "app" {
@@ -29,13 +29,13 @@ resource "azurerm_container_app" "app" {
       cpu    = 0.5
       memory = "1Gi"
 
-      # dynamic "env" {
-      #   for_each = local.env_map
-      #   content {
-      #     name  = env.key
-      #     value = env.value
-      #   }
-      # }
+      dynamic "env" {
+        for_each = local.env_map
+        content {
+          name  = env.key
+          value = env.value
+        }
+      }
     }
 
     min_replicas = 0

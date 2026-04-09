@@ -27,9 +27,10 @@ azure_login(){
 
 get_doppler_secrets(){
     local  SECRET=$1
-    local ENV_FILE=$2
+    local  ENV_FILE=$2
+    local  FORMAT=$3
 
-    doppler secrets download -p vault-codeparce -c $SECRET --no-file --format env -t "$DOPPLER_TOKEN" > $ENV_FILE
+    doppler secrets download -p vault-codeparce -c $SECRET --no-file --format $FORMAT -t "$DOPPLER_TOKEN" > $ENV_FILE
     echo "✅ Download Secrets from Doppler to $ENV_FILE"
 }
 
@@ -40,4 +41,9 @@ enviroment () {
     source $ENV_FILE
     set +a
     echo "✅ Set environment variables from $ENV_FILE"
+}
+
+get_App_Configuration_azure () {
+    az appconfig kv export --name $TF_VAR_app_config_name --label $GITHUB_REPOSITORY_NAME-$GITHUB_REF_NAME --destination file --path ./config.json --format json --skip-feature --yes
+    echo "✅ Configuracion descargada"
 }
