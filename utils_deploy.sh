@@ -30,6 +30,7 @@ get_doppler_secrets(){
     local ENV_FILE=$2
 
     doppler secrets download -p vault-codeparce -c $SECRET --no-file --format env -t "$DOPPLER_TOKEN" > $ENV_FILE
+    echo "✅ Download Secrets from Doppler to $ENV_FILE"
 }
 
 
@@ -38,5 +39,5 @@ enviroment () {
     set -a
     source $ENV_FILE
     set +a
-    echo "✅ Set environment"
+    echo "✅ Set environment variables from $ENV_FILE"
 }

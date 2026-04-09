@@ -20,6 +20,8 @@ enviroment ".env"
 
 enviroment ".env.cloud"
 
+ll && cat .env
+
 azure_login
 
 terraform_shell
