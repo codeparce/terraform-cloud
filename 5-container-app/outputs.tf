@@ -1,6 +1,6 @@
 output "container_app_url" {
   description = "URL pública de la Azure Container App"
-  value       = "http://" + azurerm_container_app.app.ingress[0].fqdn
+  value       = "http://" + azurerm_container_app.app.ingress.fqdn
 }
 
 output "container_app_name" {
@@ -12,5 +12,5 @@ output "resource_group_name" {
 }
 
 output "container_app_environment_name" {
-  value =  data.azurerm_container_app_environment.env.name
+  value = data.azurerm_container_app_environment.env.name
 }
