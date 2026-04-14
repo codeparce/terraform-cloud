@@ -8,11 +8,8 @@ terraform_shell () { ## separar en funciones para mayor optimzacion en los jobs
     echo "✅ terraform init"
 
     #terraform plan -out=tfplan 
-    terraform plan  
     
-    #terraform show -no-color tfplan | tail -20
-
-    echo "✅ terraform plan"
+    #echo "✅ terraform plan"
 
     #terraform apply -input=false tfplan 2>/dev/null
     terraform apply -auto-approve -input=false 2>&1 | \
