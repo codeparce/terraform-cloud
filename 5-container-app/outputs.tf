@@ -1,6 +1,6 @@
 output "container_app_url" {
   description = "URL pública de la Azure Container App"
-  value       = "http://${azurerm_container_app.app.ingress[0].fqdn}"
+  value       = "https://${azurerm_container_app.app.ingress[0].fqdn}"
 }
 
 output "container_app_name" {
