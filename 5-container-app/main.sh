@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -Eeuo pipefail
 
 source ../logs.sh
 source ../utils_deploy.sh
