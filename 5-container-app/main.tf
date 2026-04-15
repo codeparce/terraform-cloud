@@ -18,19 +18,16 @@ resource "azurerm_container_app" "app" {
   resource_group_name          = data.azurerm_resource_group.rg.name
   revision_mode                = "Single"
 
-  
-
   identity {
     type = "SystemAssigned"
   }
-  
 
   template {
     container {
       name   = var.CONTAINER_APP_NAME
       image  = var.CONTAINER_IMAGE
-      cpu    = 0.5
-      memory = "0.5Gi"
+      cpu    = var.CPU
+      memory = var.MEMORY
 
       dynamic "env" {
         for_each = local.env_map
@@ -41,14 +38,14 @@ resource "azurerm_container_app" "app" {
       }
     }
 
-    min_replicas = 1
-    max_replicas = 2
+    min_replicas = var.MIN_REPLICAS
+    max_replicas = var.MAX_REPLICAS
   }
 
   ingress {
     #cors { allowed_origins = ["*"] }
 
-    external_enabled = false
+    external_enabled = var.EXTERNAL_ENABLED
     target_port      = 8080
 
     traffic_weight {
