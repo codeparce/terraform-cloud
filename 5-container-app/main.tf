@@ -26,8 +26,8 @@ resource "azurerm_container_app" "app" {
     container {
       name   = var.CONTAINER_APP_NAME
       image  = var.CONTAINER_IMAGE
-      cpu    = 0.5
-      memory = "1Gi"
+      cpu    = 1
+      memory = "2Gi"
 
       dynamic "env" {
         for_each = local.env_map
@@ -38,13 +38,14 @@ resource "azurerm_container_app" "app" {
       }
     }
 
-    min_replicas = 0
-    max_replicas = 1
+    min_replicas = 1
+    max_replicas = 2
   }
 
   ingress {
-    external_enabled = false
+    #cors { allowed_origins = ["*"] }
     
+    external_enabled = true
     target_port      = 8080
 
     traffic_weight {
