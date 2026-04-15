@@ -18,16 +18,19 @@ resource "azurerm_container_app" "app" {
   resource_group_name          = data.azurerm_resource_group.rg.name
   revision_mode                = "Single"
 
+  
+
   identity {
     type = "SystemAssigned"
   }
+  
 
   template {
     container {
       name   = var.CONTAINER_APP_NAME
       image  = var.CONTAINER_IMAGE
-      cpu    = 1
-      memory = "2Gi"
+      cpu    = 0.5
+      memory = "0.5Gi"
 
       dynamic "env" {
         for_each = local.env_map
@@ -44,8 +47,8 @@ resource "azurerm_container_app" "app" {
 
   ingress {
     #cors { allowed_origins = ["*"] }
-    
-    external_enabled = true
+
+    external_enabled = false
     target_port      = 8080
 
     traffic_weight {
