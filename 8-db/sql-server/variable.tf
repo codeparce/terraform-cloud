@@ -35,7 +35,6 @@ variable "SQL_USERNAME" {
 }
 
 variable "IP_TEST" {
-  default     = "tu.ip.publica.aqui"
   description = "Dirección IP de prueba para el firewall de SQL Server"
   type = string
 }
