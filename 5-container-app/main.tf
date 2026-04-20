@@ -3,7 +3,7 @@ data "azurerm_resource_group" "rg" {
 }
 
 data "azurerm_container_app_environment" "env" {
-  name                = var.CONTAINER_ENVIRONMENT
+  name                = var.CONTAINER_ENVIRONMENT_NAME
   resource_group_name = var.CONTAINER_ENVIRONMENT_RG
 }
 

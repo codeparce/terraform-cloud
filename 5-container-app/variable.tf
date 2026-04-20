@@ -10,7 +10,7 @@ variable "RESOURCE_GROUP_NAME" {
   type        = string
 }
 
-variable "CONTAINER_ENVIRONMENT" {
+variable "CONTAINER_ENVIRONMENT_NAME" {
   default     = "continer-environment-app"
   description = "nombre del Container App Environment"
   type        = string
@@ -43,7 +43,7 @@ variable "CPU" {
 }
 
 variable "MEMORY" {
-  default     = "1.0Gi"
+  default     = "1Gi"
   description = "cantidad de memoria para el contenedor"
   type        = string
 }
