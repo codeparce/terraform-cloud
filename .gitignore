@@ -7,6 +7,14 @@ secret
 
 .terraform.lock.hcl
 
-*.zip
+.log
 
-terraform-ci-key.json
+
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+*.pem
+*.key
+crash.log
+override.tf
