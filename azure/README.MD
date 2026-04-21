@@ -1,4 +1,4 @@
-# Azure + Terraform
+# Terraform Cloud
 
 ## Comandos Azure
 
