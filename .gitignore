@@ -8,3 +8,14 @@ secret
 .terraform.lock.hcl
 
 .log
+
+
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+.env
+*.pem
+*.key
+crash.log
+override.tf
