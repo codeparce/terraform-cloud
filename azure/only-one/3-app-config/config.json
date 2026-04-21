@@ -1,0 +1,5 @@
+{
+    "DB_URL": "http://localhst",
+    "TEST": "Prueba de envs en key vault",
+    "SPRING_PROFILES_ACTIVE": "cualquier"
+}
