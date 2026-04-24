@@ -7,7 +7,7 @@ terraform_shell () { ## separar en funciones para mayor optimzacion en los jobs
 
     echo "✅ terraform init"
 
-    terraform plan -out=tfplan -lock=false  2>&1 
+    terraform plan -out=tfplan > dev/null 2>"$LOG_ERR"
     
     echo "✅ terraform plan"
 
