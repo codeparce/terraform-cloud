@@ -7,11 +7,13 @@ terraform_shell () { ## separar en funciones para mayor optimzacion en los jobs
 
     echo "✅ terraform init"
 
-    terraform plan -out=tfplan > dev/null 2>"$LOG_ERR"
+    #terraform plan -out=tfplan > /dev/null 2>"$LOG_ERR"
     
-    echo "✅ terraform plan"
+    # echo "✅ terraform plan"
 
-    terraform apply -input=false tfplan  2>&1 
+    echo "Applying Terraform configuration..."
+    terraform apply -auto-approve  > /dev/null 2>"$LOG_ERR"
+
     #terraform apply -auto-approve -input=false 2>&1 | \
     #grep -vE '^\s*(name|value)\s*='
 
