@@ -1,8 +1,3 @@
-resource "aws_key_pair" "key" {
-  key_name   = "pc-ssh-key"
-  public_key = file("~/.ssh/id_rsa.pub")
-}
-
 
 module "ec2_instance" {
   source = "terraform-aws-modules/ec2-instance/aws"
@@ -12,8 +7,8 @@ module "ec2_instance" {
   instance_type = "t3.micro"
   monitoring    = true
 
-  # SSh key
-  key_name      = aws_key_pair.key.key_name
+  #Connect SSM role to the instance
+  iam_instance_profile = aws_iam_instance_profile.ssm_profile.name
   
   ## VPC - subnet
   subnet_id     = each.value.subnet_id

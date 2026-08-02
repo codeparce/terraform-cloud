@@ -30,14 +30,6 @@ module "vpc_test" {
     },
     {
       "cidr_block" : "${chomp(data.http.my_ip.response_body)}/32",
-      "from_port" : 22,
-      "protocol" : "tcp",
-      "rule_action" : "allow",
-      "rule_number" : 1,
-      "to_port" : 22
-    },
-    {
-      "cidr_block" : "${chomp(data.http.my_ip.response_body)}/32",
       "from_port" : 80,
       "protocol" : "tcp",
       "rule_action" : "allow",
