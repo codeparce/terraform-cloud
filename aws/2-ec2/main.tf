@@ -22,7 +22,13 @@ module "ec2_instance" {
   name = each.value.name
 
   instance_type = "t3.micro"
+  
+  # SSh key to connect to the instance
   key_name      = aws_key_pair.main.key_name
+
+  #Connect SSM role to the instance
+  #iam_instance_profile = aws_iam_instance_profile.ssm_profile.name
+
   monitoring    = true
   subnet_id     = each.value.subnet_id
 
