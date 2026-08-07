@@ -15,9 +15,9 @@ module "ec2_instance" {
 
   ## Security grups
   create_security_group = false
-  vpc_security_group_ids  = each.value.sg_id
+  vpc_security_group_ids  = each.value.sg_ec2_id
 
-  associate_public_ip_address = true
+  #associate_public_ip_address = false
 
   tags = {
     Terraform   = "true"
