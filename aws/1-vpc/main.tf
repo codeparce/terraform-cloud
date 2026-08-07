@@ -10,17 +10,34 @@ module "vpc" {
 
   azs                  = ["us-east-1a"]
   private_subnets      = ["10.0.1.0/24"]
+  
+  private_subnet_tags = {
+    "Type" = "private"
+  }
+  
   public_subnets       = ["10.0.101.0/24"]
+  public_subnet_tags = {
+    "Type" = "public"
+  }
+  
   enable_dns_hostnames = true
 
-  enable_nat_gateway = false
+  # para que los recursos privados, puedan salir a internet
+  enable_nat_gateway = true
+  
   enable_vpn_gateway = false
 
   manage_default_route_table    = false
   manage_default_network_acl    = false
   manage_default_security_group = false
+  # para modificar las reglas de ACL predeterminadas
+  # manage_default_network_acl = true
+  # default_network_acl_ingress 
+  # default_network_acl_egress 
   
   public_dedicated_network_acl  = true
+
+  
 
   public_inbound_acl_rules = [
     {
