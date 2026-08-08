@@ -7,7 +7,9 @@ terraform {
   }
   backend "s3" {
     bucket = "codeparce"
-    key = "test/vpc_alb_acs/terraform.tfstate"
+    key = "test/3_vpc_alb_acs/terraform.tfstate"
+    # dynamodb_table = "terraform_state"
+    use_lockfile = true
     region = "us-east-1"
   }
 }
