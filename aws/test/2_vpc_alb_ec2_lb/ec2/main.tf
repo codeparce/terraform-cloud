@@ -14,7 +14,7 @@ module "ec2_instance" {
   subnet_id     = each.value.subnet_id
 
   ## Security grups
-  create_security_group = false
+  create_security_group = true
   vpc_security_group_ids  = each.value.sg_ec2_id
 
   #associate_public_ip_address = false
