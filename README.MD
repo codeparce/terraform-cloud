@@ -1,8 +1,10 @@
 # Terraform Cloud
 
-[ Terraform Azure ](https://github.com/codeparceorg/terraform-cloud/tree/azure)
+[ Terraform Azure ](./aws/README.MD)
 
-[ Terraform GCP ](https://github.com/codeparceorg/terraform-cloud/tree/gcp)
+[ Terraform Azure ](./azure/README.MD)
+
+[ Terraform GCP ](./gcp/README.MD)
 
 ### Comando terraform basicos
 
@@ -18,3 +20,24 @@ terraform apply
 terraform destroy 
 ```
 
+## MAP + COST
+
+[Herramienta para graficar infra Automaticamente](https://app.cloudcraft.co/)
+
+
+[Herramienta para monitoriar los costos](https://dashboard.infracost.io/)
+
+```bash
+# login para dashboard
+infracost auth login
+
+# Ejecutamos el plan
+terraform plan -out tfplan.binary
+terraform show -json tfplan.binary > plan.json
+
+infracost scan plan.json
+
+## Mas detalles 
+infracost inspect --top 10 
+infracost inspect --failing
+```

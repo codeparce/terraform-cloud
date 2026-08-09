@@ -18,11 +18,6 @@ variable "ec2_id" {
   type        = string
 }
 
-variable "ec2_id" {
-  description = "EC2 Instance ID"
-  type        = string
-}
-
 variable "lambda" {
   description = "Lambda Function ARN"
 }

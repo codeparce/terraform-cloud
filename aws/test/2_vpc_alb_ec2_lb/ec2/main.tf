@@ -4,7 +4,7 @@ module "ec2_instance" {
 
   for_each = var.vms_confg
   name = each.value.name
-  instance_type = "t3.micro"
+  instance_type = "t3.micro" # t1.micro es la mas barata
   monitoring    = true
 
   #Connect SSM role to the instance

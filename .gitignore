@@ -8,7 +8,11 @@ secret
 .terraform.lock.hcl
 
 .log
-
+ig
+func
+.infracost
+plan.json
+tfplan.binary
 
 *.tfstate
 *.tfstate.*
