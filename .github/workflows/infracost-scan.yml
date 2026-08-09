@@ -11,9 +11,6 @@ jobs:
   infracost-scan:
     runs-on: ubuntu-latest
 
-    env:
-      INFRACOST_CLI_AUTHENTICATION_TOKEN: ${{ secrets.INFRACOST_CLI_AUTHENTICATION_TOKEN }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,10 +18,9 @@ jobs:
       - name: Setup Infracost
         uses: infracost/actions/setup@v3
 
-      - name: Test Infracost authentication
+      - name: Configure Infracost
         run: |
-          infracost auth whoami
-          infracost org current
+          infracost configure set api_key ${{ secrets.INFRACOST_API_KEY }}
 
       - name: Run Infracost Scan
         run: |
