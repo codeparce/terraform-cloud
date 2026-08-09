@@ -18,4 +18,4 @@ jobs:
         uses: infracost/actions/scan@c2e668fda0716ccc96353c6e6438c4a20448821a
         with:
           api-key: ${{ secrets.INFRACOST_API_KEY }}
-          path: .
+          path: ./aws/test/2_vpc_alb_ec2_lb
