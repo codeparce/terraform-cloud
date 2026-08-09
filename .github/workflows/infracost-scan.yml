@@ -14,6 +14,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Test Infracost authentication
+        env:
+          INFRACOST_CLI_AUTHENTICATION_TOKEN: ${{ secrets.INFRACOST_API_KEY }}
+        run: |
+          infracost auth whoami
+          infracost org current
+
       - name: Run Infracost Scan
         uses: infracost/actions/scan@c2e668fda0716ccc96353c6e6438c4a20448821a
         with:
