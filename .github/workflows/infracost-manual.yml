@@ -1,0 +1,162 @@
+name: Infracost
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  infracost:
+    name: Terraform + Infracost
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # --------------------------------------------------
+      # 1. Checkout
+      # --------------------------------------------------
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # --------------------------------------------------
+      # 2. Setup Terraform
+      # --------------------------------------------------
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      # --------------------------------------------------
+      # 3. Setup Infracost
+      # --------------------------------------------------
+      - name: Setup Infracost
+        uses: infracost/actions/setup@v3
+
+      # --------------------------------------------------
+      # 4. Configure Infracost
+      # --------------------------------------------------
+      - name: Configure Infracost
+        env:
+          INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
+        run: |
+          infracost configure set api_key "$INFRACOST_API_KEY"
+
+      # --------------------------------------------------
+      # 5. Terraform Init
+      # --------------------------------------------------
+      - name: Terraform Init
+        working-directory: ./aws/test/2_vpc_alb_ec2_lb
+        run: terraform init
+
+      # --------------------------------------------------
+      # 6. Terraform Plan
+      # --------------------------------------------------
+      - name: Terraform Plan
+        working-directory: ./aws/test/2_vpc_alb_ec2_lb
+        run: |
+          terraform plan -out tfplan.binary
+
+      # --------------------------------------------------
+      # 7. Convert Terraform plan to JSON
+      # --------------------------------------------------
+      - name: Terraform Plan JSON
+        working-directory: ./aws/test/2_vpc_alb_ec2_lb
+        run: |
+          terraform show -json tfplan.binary > plan.json
+
+      # --------------------------------------------------
+      # 8. Infracost Scan
+      # --------------------------------------------------
+      - name: Infracost Scan
+        working-directory: ./aws/test/2_vpc_alb_ec2_lb
+        run: |
+          infracost scan plan.json --no-color > infracost-scan.txt
+
+          echo "===== Infracost Scan ====="
+          cat infracost-scan.txt
+
+      # --------------------------------------------------
+      # 9. Infracost Inspect - Top 10
+      # --------------------------------------------------
+      - name: Infracost Inspect Top 10
+        working-directory: ./aws/test/2_vpc_alb_ec2_lb
+        run: |
+          infracost inspect --top 10 --no-color > infracost-top10.txt
+
+          echo "===== Top 10 ====="
+          cat infracost-top10.txt
+
+      # --------------------------------------------------
+      # 10. Infracost Inspect - Failing
+      # --------------------------------------------------
+      - name: Infracost Inspect Failing
+        working-directory: ./aws/test/2_vpc_alb_ec2_lb
+        run: |
+          infracost inspect --failing --no-color > infracost-failing.txt
+
+          echo "===== Failing ====="
+          cat infracost-failing.txt
+
+      # --------------------------------------------------
+      # 11. Comment - Scan
+      # --------------------------------------------------
+      - name: Comment Infracost Scan
+        env:
+          GH_TOKEN: ${{ github.token }}
+        working-directory: ./aws/test/2_vpc_alb_ec2_lb
+        run: |
+          {
+            echo "## 💰 Infracost Scan"
+            echo
+            echo '```text'
+            cat infracost-scan.txt
+            echo '```'
+          } > comment-scan.md
+
+          gh pr comment \
+            "${{ github.event.pull_request.number }}" \
+            --body-file comment-scan.md
+
+      # --------------------------------------------------
+      # 12. Comment - Top 10
+      # --------------------------------------------------
+      - name: Comment Infracost Top 10
+        env:
+          GH_TOKEN: ${{ github.token }}
+        working-directory: ./aws/test/2_vpc_alb_ec2_lb
+        run: |
+          {
+            echo "## 📊 Infracost - Top 10 resources"
+            echo
+            echo '```text'
+            cat infracost-top10.txt
+            echo '```'
+          } > comment-top10.md
+
+          gh pr comment \
+            "${{ github.event.pull_request.number }}" \
+            --body-file comment-top10.md
+
+      # --------------------------------------------------
+      # 13. Comment - Failing
+      # --------------------------------------------------
+      - name: Comment Infracost Failing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        working-directory: ./aws/test/2_vpc_alb_ec2_lb
+        run: |
+          {
+            echo "## 🚨 Infracost - Failing policies"
+            echo
+            echo '```text'
+            cat infracost-failing.txt
+            echo '```'
+          } > comment-failing.md
+
+          gh pr comment \
+            "${{ github.event.pull_request.number }}" \
+            --body-file comment-failing.md
