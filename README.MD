@@ -1,6 +1,6 @@
 # Terraform Cloud
 
-[ Terraform Azure ](./aws/README.MD)
+[ Terraform AWS ](./aws/README.MD)
 
 [ Terraform Azure ](./azure/README.MD)
 
