@@ -14,7 +14,7 @@ resource "aws_security_group" "sg_ec2" {
 resource "aws_vpc_security_group_ingress_rule" "ir_sg_ec2_http" {
   security_group_id = aws_security_group.sg_ec2.id
 
-  cidr_ipv4   = "${chomp(data.http.my_ip.response_body)}/32"
+  cidr_ipv4   = "0.0.0.0/0"
   from_port   = 80
   ip_protocol = "tcp"
   to_port     = 80
@@ -23,7 +23,7 @@ resource "aws_vpc_security_group_ingress_rule" "ir_sg_ec2_http" {
 resource "aws_vpc_security_group_ingress_rule" "ir_sg_ec2_https" {
   security_group_id = aws_security_group.sg_ec2.id
 
-  cidr_ipv4   = "${chomp(data.http.my_ip.response_body)}/32"
+  cidr_ipv4   = "0.0.0.0/0"
   from_port   = 443
   ip_protocol = "tcp"
   to_port     = 443
@@ -32,7 +32,8 @@ resource "aws_vpc_security_group_ingress_rule" "ir_sg_ec2_https" {
 resource "aws_vpc_security_group_ingress_rule" "ir_sg_ec2_ssh" {
   security_group_id = aws_security_group.sg_ec2.id
 
-  cidr_ipv4   = "${chomp(data.http.my_ip.response_body)}/32"
+  #cidr_ipv4   = "${chomp(data.http.my_ip.response_body)}/32"
+  cidr_ipv4   = "0.0.0.0/0"
   from_port   = 22
   ip_protocol = "tcp"
   to_port     = 22
