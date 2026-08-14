@@ -1,8 +1,8 @@
 resource "aws_route53_zone" "hz" {
-  name = "prod.codeparce.site"
+  name = var.domain_name
 
   tags = {
-    name        = "codeparce.site"
-    env = "prod"
+    name = "${var.domain_name}"
+    env  = "prod"
   }
 }
