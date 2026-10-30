@@ -4,7 +4,8 @@
 *.tfvars
 
 secret
-
+node_modules
+.env
 .terraform.lock.hcl
 
 .log

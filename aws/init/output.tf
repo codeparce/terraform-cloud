@@ -1,4 +1,20 @@
 # outputs.tf
+output "Subred-public" {
+  value = module.vpc.public_subnets
+}
+
+
+
+## EC2 ======
+
+output "public_ip_test" {
+  value = module.ec2_instance["vm1"].public_ip
+}
+output "public_ip_dev" {
+  value = module.ec2_instance["vm2"].public_ip
+}
+
+# ALB ======
 output "sg-id" {
   value = aws_security_group.lb_sg.id
 }

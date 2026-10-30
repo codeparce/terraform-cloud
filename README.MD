@@ -55,6 +55,9 @@ terraform plan --out tfplan.binary
 # valida vulnerabilidades del plan hecho
 trivy config tfplan.binary
 
+# valida Secretos
+trivy fs --scanners vuln,secret,config .
+
 # apply
 terraform apply 
 ```
