@@ -2,6 +2,8 @@
 *.tfstate
 *.tfstate.*
 *.tfvars
+.vscode
+__azurite_db_blob__.json
 
 secret
 node_modules
